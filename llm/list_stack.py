@@ -13,12 +13,12 @@ class Stack(object):
     def push(self, s):
         self.L[self.N] = s
         self.N += 1
-
+   #take care of the element's index that returned(not self.N+1, but self.N)
     def pop(self):
         self.N -= 1
         return self.L[self.N]
 
-    def isFull(self):
+    def is_full(self):
         return self.N == self.M
 
 
@@ -26,12 +26,10 @@ def test(s):
     stack = Stack(0, 5)
     for i in s:
         if i == "-":
-            print stack.pop()
-
+            stack.pop()
         else:
             stack.push(i)
-            print i, stack.N, "*************", stack.L
-    print stack.L, stack.size()
+    print stack.size(), stack.is_empty(), stack.is_full()
 
 
 
