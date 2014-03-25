@@ -3,6 +3,7 @@ class Node(object):
         self.item = item
         self.next = next
 
+
 class LinkStack(object):
     def __init__(self, first, N):
         self.N = N
@@ -11,7 +12,6 @@ class LinkStack(object):
     def isEmpty(self):
         return self.first is None
             
-
     def size(self):
         return self.N
 
@@ -24,7 +24,16 @@ class LinkStack(object):
         item = self.first.item
         self.first = self.first.next
         self.N -= 1
-        return item  
+        return item
+
+    def peek(self):
+        return self.first.item
+
+    def __iter__(self):
+        while self.first is not None:
+            item = self.first.item
+            self.first = self.first.next
+            yield item
 
 
 def test(s):
@@ -38,12 +47,9 @@ def test(s):
     
 
 def print_item(link):
-    length = link.N
     s= []
-    for i in range(length):
-        item = link.first.item
-        link.first = link.first.next
-        s.append(item)
+    for i in link:
+        s.append(i)
     print s
     print "the number of link.Items is", link.N
 
