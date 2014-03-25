@@ -1,22 +1,24 @@
 from link_stack import LinkStack
+from link_queue import LinkQueue
 
-def insert_parentheses(s):
+def infix_to_postfix(s):
     s_new = format_s(s)
-    stack_figure = LinkStack(None, 0)
+    queue_figure = LinkQueue(None, None, 0)
     stack_operator = LinkStack(None, 0)
+    result = ""
     for i in s_new:
         if i == ")":
-            num_last = stack_figure.pop()
-            str = " ( %s %s %s ) " %(stack_figure.pop(), stack_operator.pop(), num_last)
-            stack_figure.push(str)
-        elif i.isdigit():
-            stack_figure.push(i)
-        elif i == " ":
+            queue_figure.enqueue(stack_operator.pop())
+        elif i == "(" or i == " ":
             pass
+        elif i.isdigit():
+            queue_figure.enqueue(i)
         else:
             stack_operator.push(i)
-    for i in stack_figure:
-        print i
+    
+    for i in queue_figure:
+        result += " %s"%i
+    print result
 
 
 def format_s(s):
@@ -33,7 +35,5 @@ def format_s(s):
     return s_new
 
 
-s = "1 + 2 ) * 3 - 4 ) * 5 - 6 ) ) )"
-
-insert_parentheses(s)
-
+s = "((1 + 122) * 23)"
+infix_to_postfix(s)
