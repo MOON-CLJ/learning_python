@@ -1,9 +1,11 @@
+# -*- coding: UTF-8 -*-
+#b标准公式输入，非全括号表达式
 from link_stack import LinkStack
 
 def infix_to_postfix(s):
     result = ""
     stack_operator = LinkStack(None, 0)
-
+    
     for i in s:
         if i.isdigit():
             result += " %s"%i
@@ -15,11 +17,15 @@ def infix_to_postfix(s):
                 else:
                     break
         elif i in ["+", "-", "*", "/"]:
-            if not stack_operator.isEmpty():
-                oper = stack_operator.peek()
-                if oper in ["+", "-", "*", "/"]:
-                    if is_priority(oper, i):
-                        result += " %s"%stack_operator.pop()
+            while True:
+                if not stack_operator.isEmpty():
+                    oper = stack_operator.peek()
+                    if oper in ["+", "-", "*", "/"]:
+                        if is_priority(oper, i):
+                            result  += " %s"%stack_operator.pop()
+                        else:break
+                    else:break
+                else:break
             stack_operator.push(i)
         elif i == "(":
             stack_operator.push(i)
@@ -27,7 +33,7 @@ def infix_to_postfix(s):
         for i in stack_operator:
             result += " %s"%i
     print result
-
+    
 
 def is_priority(oper_1, oper_2):
     #oper_2 is more prior
@@ -53,6 +59,6 @@ def divide_str(s):
     return l
 
 
-s = "3+(2-5*4)*6/3"
+s = "3+2*5-4"
 s = divide_str(s)
 infix_to_postfix(s)

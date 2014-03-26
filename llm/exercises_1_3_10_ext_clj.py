@@ -37,11 +37,14 @@ def InfixToPostfix(infix):
                 result += " %s" % stack.pop()
             stack.pop()
         else:
-            if not stack.isEmpty():
+            while 1:
+                if stack.isEmpty():
+                    break
                 last = stack.peek()
-                while last != "(" and prior[last] >= prior[i]:
+                if last != "(" and prior[last] >= prior[i]:
                     result += " %s" % stack.pop()
-                    last = stack.peek()
+                else:
+                    break
             stack.push(i)
 
     while not stack.isEmpty():
@@ -51,5 +54,6 @@ def InfixToPostfix(infix):
 
 
 s = "3+(2-5*4)*6/3"
+s = "3+2*5-4"
 s = divide_str(s)
 InfixToPostfix(s)
