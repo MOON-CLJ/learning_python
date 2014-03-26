@@ -9,7 +9,7 @@ def InfixToPostfix(infix):
             num_last = stack_figure.pop()
             expr = "%s %s %s" % (stack_figure.pop(), num_last, stack_operator.pop())
             stack_figure.push(expr)
-        if i.isdigit():
+        elif i.isdigit():
             stack_figure.push(i)
         elif i in ["+", "-", "*"]:
             stack_operator.push(i)
