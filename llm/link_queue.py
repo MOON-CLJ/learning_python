@@ -9,6 +9,7 @@ class LinkQueue(object):
         self.first = first
         self.last = last
         self.N = N
+
     def isEmpty(self):
         return self.first is None
 
@@ -23,6 +24,7 @@ class LinkQueue(object):
         else:
             oldLast.next = self.last
         self.N += 1
+
     def dequeue(self):
         item = self.first.item
         self.first = self.first.next
@@ -31,8 +33,17 @@ class LinkQueue(object):
         self.N -= 1
         return item
 
-    
-def test(s):
+    def __iter__(self):
+        now = self.first
+        while now:
+            item = now.item
+            now = now.next
+            yield item
+
+
+
+
+"""def test(s):
     link = LinkQueue(None, None, 0)
     for i in s:
         if i == "-":
@@ -43,16 +54,13 @@ def test(s):
     
 
 def print_item(link):
-    length = link.N
     s= []
-    for i in range(length):
-        item = link.first.item
-        link.first = link.first.next
-        s.append(item)
+    for i in link:
+        s.append(i)
     print s
     print "the number of link.Items is", link.N
 
 
 s = ["to", "be", "or", "not", "to", "-", "be", "-", "-", "-", "that","-", "-", "is"]
-test(s)
+test(s)"""
        

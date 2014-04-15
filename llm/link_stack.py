@@ -8,10 +8,10 @@ class LinkStack(object):
     def __init__(self, first, N):
         self.N = N
         self.first = first
-      
+
     def isEmpty(self):
         return self.first is None
-            
+
     def size(self):
         return self.N
 
@@ -30,13 +30,14 @@ class LinkStack(object):
         return self.first.item
 
     def __iter__(self):
-        while self.first is not None:
-            item = self.first.item
-            self.first = self.first.next
+        now = self.first
+        while now:
+            item = now.item
+            now = now.next
             yield item
 
 
-def test(s):
+"""def test(s):
     link = LinkStack(None, 0)
     for i in s:
         if i == "-":
@@ -44,7 +45,7 @@ def test(s):
         else:
             link.push(i)
     print_item(link)
-    
+
 
 def print_item(link):
     s= []
@@ -55,6 +56,6 @@ def print_item(link):
 
 
 s = ["to", "be", "or", "not", "to", "-", "be", "-", "-", "-", "that","-", "-", "is"]
-test(s)
+test(s)"""
 
 
