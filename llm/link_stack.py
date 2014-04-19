@@ -8,6 +8,7 @@ class LinkStack(object):
     def __init__(self, first, N):
         self.N = N
         self.first = first
+        self.count = 0
 
     def isEmpty(self):
         return self.first is None
@@ -19,25 +20,33 @@ class LinkStack(object):
         oldNode = self.first
         self.first = Node(item, oldNode)
         self.N += 1
+        self.count += 1
 
     def pop(self):
         item = self.first.item
         self.first = self.first.next
         self.N -= 1
+        self.count += 1
         return item
 
     def peek(self):
         return self.first.item
 
     def __iter__(self):
+        num = self.count
         now = self.first
         while now:
-            item = now.item
-            now = now.next
-            yield item
+            print "num:", num, "self.count", self.count
+            if num == self.count:
+                item = now.item
+                now = now.next
+                yield item
+            else:
+                print "wrong"
+                return
 
 
-"""def test(s):
+def test(s):
     link = LinkStack(None, 0)
     for i in s:
         if i == "-":
@@ -48,14 +57,17 @@ class LinkStack(object):
 
 
 def print_item(link):
-    s= []
     for i in link:
-        s.append(i)
-    print s
-    print "the number of link.Items is", link.N
+        if i == "is":
+            link.pop()
+        else:
+            print i,
+    print
+    print "the number of link.Items is", link.size()
 
 
-s = ["to", "be", "or", "not", "to", "-", "be", "-", "-", "-", "that","-", "-", "is"]
-test(s)"""
+if __name__ == "__main__":
+    s = ["to", "be", "or", "not", "to", "-", "be", "-", "-", "-", "that","-", "-", "is"]
+    test(s)
 
 
